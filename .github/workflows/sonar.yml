@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build Go
-        run: cd backend && go build ./...
+      - name: Download Go modules
+        run: cd backend && go mod download
 
       - name: Install TypeScript deps
         run: cd agent && npm ci
