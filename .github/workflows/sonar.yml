@@ -1,0 +1,31 @@
+name: Sonar Analysis
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Go
+        run: cd backend && go build ./...
+
+      - name: Install TypeScript deps
+        run: cd agent && npm ci
+
+      - uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
