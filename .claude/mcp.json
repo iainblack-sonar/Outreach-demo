@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "sonarqube": {
+      "command": "npx",
+      "args": ["-y", "@sonar/sonarqube-mcp-server@latest"],
+      "env": {
+        "SONARQUBE_URL": "https://sonarqube.io",
+        "SONAR_TOKEN": "<your-sonarqube-cloud-token>"
+      }
+    }
+  }
+}
